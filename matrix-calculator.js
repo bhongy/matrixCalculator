@@ -89,10 +89,10 @@ var matrixBuilder = function(propertyMap) {
 
     // modify value from rotateZ
     rotateZ: function(angle) {
-      a *= MATH.cos(angle);
-      b *= MATH.sin(angle);
-      c *= -(MATH.sin(angle));
-      d *= MATH.cos(angle);
+      a *= Math.cos(angle);
+      b *= Math.sin(angle);
+      c *= -(Math.sin(angle));
+      d *= Math.cos(angle);
     }
 
   }; // END: calculate - Obj
