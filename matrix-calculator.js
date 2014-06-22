@@ -75,7 +75,7 @@ var matrixBuilder = function(propertyMap) {
       d *= value;
     },
 
-    /* Assume we pass in normalized angle value - Radian */
+    /* Assume we pass in normalized angle value - Radian : or we can pass in deg -> rad(deg) */
 
     // modify value from skewX
     skewX: function(angle) {
@@ -89,10 +89,13 @@ var matrixBuilder = function(propertyMap) {
 
     // modify value from rotateZ
     rotateZ: function(angle) {
-      a *= Math.cos(angle);
-      b *= Math.sin(angle);
-      c *= -(Math.sin(angle));
-      d *= Math.cos(angle);
+      var cos = Math.cos(angle) - 1, // take out the original a and d values = 1
+          sin = Math.sin(angle);
+
+      a += cos;
+      b += sin;
+      c += -sin;
+      d += cos;
     }
 
   }; // END: calculate - Obj
@@ -112,6 +115,7 @@ var matrixBuilder = function(propertyMap) {
 
   // if we have previous matrix, it should return [ a0+=a, b0+=b, ... ]
   // alternatively: return [ [a, c, e], [b, d, f] ];
+  // or return transform string: matrix(a, b, c, d, e, f) - and use .toFixed(4) ... or something
   return [a, b, c, d, e, f];
 
 }; // END: matrixBuilder - Fn
